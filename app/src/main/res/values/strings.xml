@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">FindMyVolunteer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="google_app_id">887303647100</string>
+</resources>
