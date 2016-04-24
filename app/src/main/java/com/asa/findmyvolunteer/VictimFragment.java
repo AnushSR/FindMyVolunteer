@@ -1,6 +1,7 @@
 package com.asa.findmyvolunteer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -70,27 +71,13 @@ public class VictimFragment extends Fragment {
         if (!validateReq()) {
             return;
         }
-        String name=inputName.getText().toString();
-        String phone=inputPhone.getText().toString();
-        String sit=inputSit.getText().toString();
-        String req=inputReq.getText().toString();
+        Intent intent=new Intent(getActivity(),MapsActivity.class);
+        intent.putExtra("name",inputName.getText().toString());
+        intent.putExtra("phone",inputPhone.getText().toString());
+        intent.putExtra("sit",inputSit.getText().toString());
+        intent.putExtra("req",inputReq.getText().toString());
+        startActivity(intent);
 
-        VictimData victimData = new VictimData();
-        victimData.setName(name);
-        victimData.setPhone(phone);
-        victimData.setSit(sit);
-        victimData.setReq(req);
-        Backendless.Persistence.save( victimData, new AsyncCallback<VictimData>() {
-            public void handleResponse( VictimData response )
-            {
-                // new Contact instance has been saved
-            }
-
-            public void handleFault( BackendlessFault fault )
-            {
-                // an error has occurred, the error code can be retrieved with fault.getCode()
-            }
-        });
     }
     private boolean validateName() {
         if (inputName.getText().toString().trim().isEmpty()) {

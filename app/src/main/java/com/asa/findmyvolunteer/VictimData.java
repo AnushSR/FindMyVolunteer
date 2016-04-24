@@ -1,5 +1,7 @@
 package com.asa.findmyvolunteer;
 
+import com.backendless.geo.GeoPoint;
+
 /**
  * Created by Anush on 24-04-2016.
  */
@@ -7,6 +9,7 @@ public class VictimData {
     private String objectId;
     private String name;
     private String phone;
+    public GeoPoint location;
     private String sit;
     private String req;
 
@@ -47,5 +50,14 @@ public class VictimData {
 
     public void setReq( String req ) {
         this.req = req;
+    }
+    public GeoPoint getLocation()
+    {
+        return location;
+    }
+
+    public void setLocation( GeoPoint location )
+    {
+        this.location = location;
     }
 }
