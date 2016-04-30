@@ -30,7 +30,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class VictimFragment extends Fragment {
     private EditText inputName, inputPhone, inputSit,inputReq;
     private TextInputLayout inputLayoutName, inputLayoutPhone, inputLayoutSit,inputLayoutReq;
-    private Button btnSubmit;
+    private Button btnSubmit,btnSOS;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,6 +53,7 @@ public class VictimFragment extends Fragment {
 
             }
         });
+        btnSOS= (Button) view.findViewById(R.id.btn_sos);
 
         return view;
     }
@@ -77,6 +78,7 @@ public class VictimFragment extends Fragment {
         intent.putExtra("sit",inputSit.getText().toString());
         intent.putExtra("req",inputReq.getText().toString());
         startActivity(intent);
+        getActivity().finish();
 
     }
     private boolean validateName() {

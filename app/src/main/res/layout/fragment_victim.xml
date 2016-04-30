@@ -8,6 +8,16 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.asa.findmyvolunteer.VictimFragment">
     <!-- TODO: Update blank fragment layout -->
+    <Button android:id="@+id/btn_sos"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="SOS"
+        android:textSize="30sp"
+        android:background="@color/colorPrimary"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:textColor="@android:color/white"/>
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
@@ -72,9 +82,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Select Location"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorAccent"
             android:layout_marginTop="40dp"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white"
+            android:elevation="30dp"/>
 
     </LinearLayout>
 
