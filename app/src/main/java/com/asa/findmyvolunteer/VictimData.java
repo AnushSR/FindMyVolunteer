@@ -1,9 +1,12 @@
 package com.asa.findmyvolunteer;
 
+import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import com.backendless.geo.GeoPoint;
+import com.google.android.gms.maps.model.LatLng;
 
 /**
  * Created by Anush on 24-04-2016.
@@ -17,25 +20,6 @@ public class VictimData implements Parcelable {
     private String req;
     public VictimData(){}
 
-    protected VictimData(Parcel in) {
-        objectId = in.readString();
-        name = in.readString();
-        phone = in.readString();
-        sit = in.readString();
-        req = in.readString();
-    }
-
-    public static final Creator<VictimData> CREATOR = new Creator<VictimData>() {
-        @Override
-        public VictimData createFromParcel(Parcel in) {
-            return new VictimData(in);
-        }
-
-        @Override
-        public VictimData[] newArray(int size) {
-            return new VictimData[size];
-        }
-    };
 
     public String getObjectId() {
         return objectId;
@@ -85,6 +69,10 @@ public class VictimData implements Parcelable {
         this.location = location;
     }
 
+    public LatLng getLatLng(){
+        return new LatLng(this.location.getLatitude(),this.location.getLongitude());
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -92,10 +80,33 @@ public class VictimData implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(objectId);
-        dest.writeString(name);
-        dest.writeString(phone);
-        dest.writeString(sit);
-        dest.writeString(req);
+        dest.writeString(this.objectId);
+        dest.writeString(this.name);
+        dest.writeString(this.phone);
+        dest.writeDouble(location.getLatitude());
+        dest.writeDouble(location.getLongitude());
+        dest.writeString(this.sit);
+        dest.writeString(this.req);
     }
+
+    protected VictimData(Parcel in) {
+        this.objectId = in.readString();
+        this.name = in.readString();
+        this.phone = in.readString();
+        this.location=new GeoPoint(in.readDouble(),in.readDouble());
+        this.sit = in.readString();
+        this.req = in.readString();
+    }
+
+    public static final Parcelable.Creator<VictimData> CREATOR = new Parcelable.Creator<VictimData>() {
+        @Override
+        public VictimData createFromParcel(Parcel source) {
+            return new VictimData(source);
+        }
+
+        @Override
+        public VictimData[] newArray(int size) {
+            return new VictimData[size];
+        }
+    };
 }
