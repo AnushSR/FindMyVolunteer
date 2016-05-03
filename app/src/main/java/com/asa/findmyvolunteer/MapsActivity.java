@@ -18,6 +18,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.backendless.Backendless;
@@ -45,6 +46,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
     Marker mCurrLocationMarker;
+    FrameLayout mRoot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         final String sit=bundle.getString("sit");
         final String req=bundle.getString("req");
         assert btn != null;
+        mRoot = (FrameLayout) findViewById(R.id.map);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -83,6 +86,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         Intent intent1=new Intent(getApplicationContext(),MainActivity.class);
                         startActivity(intent1);
                         finish();
+                        Toast.makeText(getApplicationContext(),"Request Submitted !",Toast.LENGTH_LONG).show();
 
                     }
 

@@ -18,6 +18,7 @@ public class VictimData implements Parcelable {
     public GeoPoint location;
     private String sit;
     private String req;
+    private String sos;
     public VictimData(){}
 
 
@@ -59,6 +60,8 @@ public class VictimData implements Parcelable {
     public void setReq( String req ) {
         this.req = req;
     }
+    public String getSos(){return sos;}
+    public void setSos(String sos){this.sos=sos;}
     public GeoPoint getLocation()
     {
         return location;
@@ -67,10 +70,6 @@ public class VictimData implements Parcelable {
     public void setLocation( GeoPoint location )
     {
         this.location = location;
-    }
-
-    public LatLng getLatLng(){
-        return new LatLng(this.location.getLatitude(),this.location.getLongitude());
     }
 
     @Override

@@ -2,12 +2,8 @@ package com.asa.findmyvolunteer;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatAutoCompleteTextView;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.backendless.Backendless;
 import com.backendless.BackendlessCollection;
@@ -28,8 +23,6 @@ import com.backendless.persistence.BackendlessDataQuery;
 import com.backendless.persistence.QueryOptions;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 
@@ -57,16 +50,16 @@ public class VolunteerFragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 VictimData victimData = totalVictims.get(position);
-                Intent intent = new Intent(getActivity().getApplicationContext(),VolunteerMap.class);
-//                intent.putExtra("name",victimData.getName());
-//                intent.putExtra("phone",victimData.getPhone());
-//                intent.putExtra("sit",victimData.getSit());
-//                intent.putExtra("req",victimData.getReq());
-//                intent.putExtra("lat",victimData.getLocation().getLatitude());
-//                intent.putExtra("lon",victimData.getLocation().getLongitude());
-                intent.putExtra("victims",victimData);
-                startActivity(intent);
-                getActivity().finish();
+                if(victimData.getSos().equals("true")) {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), SOSMap.class);
+                    intent.putExtra("sos", victimData);
+                    startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(getActivity().getApplicationContext(), VolunteerMap.class);
+                    intent.putExtra("victims", victimData);
+                    startActivity(intent);
+                }
             }
 
             @Override
@@ -131,7 +124,7 @@ public class VolunteerFragment extends Fragment {
 
             View child = rv.findChildViewUnder(e.getX(), e.getY());
             if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
-                clickListener.onClick(child, rv.getChildPosition(child));
+                clickListener.onClick(child, rv.getChildLayoutPosition(child));
             }
             return false;
         }
