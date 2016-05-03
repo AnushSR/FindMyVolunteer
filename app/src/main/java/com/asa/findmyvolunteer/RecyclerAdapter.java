@@ -47,6 +47,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     public void onBindViewHolder(MyViewHolder holder, int position) {
         VictimData victimData = victims.get(position);
         if(victimData.getSos().equals("true")) {
+            holder.sos.setVisibility(View.VISIBLE);
+            holder.sos.setText("SOS Request");
             holder.nm.setVisibility(View.INVISIBLE);
             holder.ph.setVisibility(View.INVISIBLE);
             holder.st.setVisibility(View.INVISIBLE);
@@ -55,10 +57,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             holder.phval.setVisibility(View.INVISIBLE);
             holder.sval.setVisibility(View.INVISIBLE);
             holder.reqval.setVisibility(View.INVISIBLE);
-            holder.sos.setText("SOS Request");
         }
         else
         {
+            holder.sos.setVisibility(View.INVISIBLE);
+            holder.nm.setVisibility(View.VISIBLE);
+            holder.ph.setVisibility(View.VISIBLE);
+            holder.st.setVisibility(View.VISIBLE);
+            holder.rq.setVisibility(View.VISIBLE);
+            holder.nmval.setVisibility(View.VISIBLE);
+            holder.phval.setVisibility(View.VISIBLE);
+            holder.sval.setVisibility(View.VISIBLE);
+            holder.reqval.setVisibility(View.VISIBLE);
             holder.nmval.setText(victimData.getName());
             holder.phval.setText(victimData.getPhone());
             holder.sval.setText(victimData.getSit());
@@ -70,4 +80,5 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     public int getItemCount() {
         return victims.size();
     }
+
 }

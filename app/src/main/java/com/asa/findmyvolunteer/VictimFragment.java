@@ -222,8 +222,6 @@ public class VictimFragment extends Fragment implements GoogleApiClient.Connecti
             onConnected(bundle);
         }
     }
-
-
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     public boolean checkLocationPermission(){
         if (ContextCompat.checkSelfPermission(getContext(),

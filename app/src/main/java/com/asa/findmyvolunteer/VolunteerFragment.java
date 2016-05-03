@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,10 +35,12 @@ public class VolunteerFragment extends Fragment {
     RecyclerView recyclerView;
     CardView cardView;
     RecyclerAdapter mAdapter;
+    SwipeRefreshLayout swipeContainer;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_volunteer, container, false);
         recyclerView=(RecyclerView) view.findViewById(R.id.recycler_view);
+        swipeContainer=(SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -67,6 +70,19 @@ public class VolunteerFragment extends Fragment {
 
             }
         }));
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                clear();
+                getData();
+                swipeContainer.setRefreshing(false);
+            }
+        });
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
 
         getData();
 
@@ -80,6 +96,7 @@ public class VolunteerFragment extends Fragment {
             @Override
             public void handleResponse(BackendlessCollection<VictimData> victimDataBackendlessCollection) {
                 Log.i("Data ","Received !");
+                    totalVictims.clear();
                     totalVictims.addAll(victimDataBackendlessCollection.getCurrentPage());
                     mAdapter.notifyDataSetChanged();
             }
@@ -137,6 +154,10 @@ public class VolunteerFragment extends Fragment {
         public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
 
         }
+    }
+    public void clear() {
+        totalVictims.clear();
+        mAdapter.notifyDataSetChanged();
     }
 }
 
