@@ -73,9 +73,7 @@ public class VolunteerFragment extends Fragment {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                clear();
                 getData();
-                swipeContainer.setRefreshing(false);
             }
         });
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
@@ -99,6 +97,7 @@ public class VolunteerFragment extends Fragment {
                     totalVictims.clear();
                     totalVictims.addAll(victimDataBackendlessCollection.getCurrentPage());
                     mAdapter.notifyDataSetChanged();
+                    swipeContainer.setRefreshing(false);
             }
 
             @Override
